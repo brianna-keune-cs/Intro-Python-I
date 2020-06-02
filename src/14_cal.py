@@ -18,12 +18,12 @@ and does the following:
    the format that your program expects arguments to be given.
    Then exit the program.
 
-Note: the user should provide argument input (in the initial call to run the file) and not 
+Note: the user should provide argument input (in the initial call to run the file) and not
 prompted input. Also, the brackets around year are to denote that the argument is
 optional, as this is a common convention in documentation.
 
-This would mean that from the command line you would call `python3 14_cal.py 4 2015` to 
-print out a calendar for April in 2015, but if you omit either the year or both values, 
+This would mean that from the command line you would call `python3 14_cal.py 4 2015` to
+print out a calendar for April in 2015, but if you omit either the year or both values,
 it should use today’s date to get the month and year.
 """
 
@@ -54,10 +54,49 @@ arguments: file, [month] [year]
 
 # write function that takes in two arguments, month, year
 # month and year should be defaulted to current -> datetime library?
-# return calendar
+
+
+'''
+Prints out calendar in console.
+parameter: {int} - |optional| month, must be 1-12
+parameter: {int} - |optional| year, must be a valid 4 digit that is greater than 0
+'''
 
 
 def print_calendar(month=datetime.now().month, year=datetime.now().year):
+    sys_arg_len = len(sys.argv)
+    # if sys arguments are greater than three
+    if sys_arg_len > 3:
+        # return an error, (value error?)
+        print(
+            'You have more than 3 arguments.\nPlease enter arguments as follows:\npython3 14_cal.py [month 1 - 12] [year 1 - 9999]')
+        return
+
+    # value error statement
+    general_error = 'Please enter valid arguments:\npython3 14_cal.py [month 1 - 12] [year 1 - 9999]'
+    # set args if recieved to corseponding arguments
+    if sys_arg_len >= 2:
+        month = sys.argv[1]
+        # if month or year is not a number
+        # return an error
+        try:
+            # check if month is between 1 - 12
+            if 1 <= int(month) < 12:
+                month = int(month)
+        except ValueError:
+            print(general_error)
+            return
+    if sys_arg_len is 3:
+        year = sys.argv[2]
+        try:
+            # check if month is between 1 - 9999
+            if 1 <= int(year) < 9999:
+                year = int(year)
+        except ValueError:
+            print(general_error)
+            return
+
+    # print calendar
     print(calendar.month(year, month))
 
 
