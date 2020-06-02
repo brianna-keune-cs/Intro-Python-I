@@ -30,3 +30,36 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
+'''
+Understand:
+The goal is to implement a function that prints, or displays a calendar from the built in library.
+This function can take up to two arguments (along with calling the file).
+If no arguments are called it returns the current month and years calendar.
+What if more than two arguments are called?
+Should I limit the years this function should go to?
+What if the year input is more than four digits long?
+What if the month input is less than 1 or more than 2 digits long?
+What if there are zeros in the incorrect spaces of the arguments?
+What do I need from sys sys.args? -> shows arguments from command line
+                    calendar calendar.month(year, month) <- does not like months with one digit to have a zero in front 06
+                    datetime datetime.today() can I get the year and month from this?
+
+How do I create errors in Python?
+
+arguments: file, [month] [year]
+'''
+
+# Planning:
+
+# write function that takes in two arguments, month, year
+# month and year should be defaulted to current -> datetime library?
+# return calendar
+
+
+def print_calendar(month=datetime.now().month, year=datetime.now().year):
+    print(calendar.month(year, month))
+
+
+if __name__ == '__main__':
+    print_calendar()
